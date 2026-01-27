@@ -1,0 +1,104 @@
+*{
+margin:0;padding:0;box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{
+background:linear-gradient(120deg,#f0f9ff,#ecfeff);
+min-height:100vh;
+}
+
+/* Topbar */
+.topbar{
+background:white;
+padding:18px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+.topbar input{
+padding:10px 14px;
+border-radius:8px;
+border:1px solid #cbd5e1;
+width:250px;
+}
+
+/* Grid */
+.container{
+padding:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+/* Student Card */
+.card{
+background:white;
+padding:18px;
+border-radius:14px;
+box-shadow:0 10px 25px rgba(0,0,0,.05);
+transition:.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+color:#2563eb;
+margin-bottom:8px;
+}
+
+.card p{
+font-size:14px;
+margin:4px 0;
+color:#334155;
+}
+
+/* Modal */
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.4);
+display:none;
+place-items:center;
+}
+
+.modal-content{
+background:white;
+width:320px;
+padding:25px;
+border-radius:14px;
+text-align:center;
+}
+
+.modal-content input{
+width:100%;
+margin:8px 0;
+padding:10px;
+border-radius:8px;
+border:1px solid #cbd5e1;
+}
+
+.modal-content button{
+margin-top:12px;
+padding:10px;
+width:100%;
+background:#2563eb;
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.close{
+float:right;
+font-size:22px;
+cursor:pointer;
+}

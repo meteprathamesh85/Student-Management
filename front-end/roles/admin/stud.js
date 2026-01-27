@@ -1,0 +1,465 @@
+// ===== Loader =====
+window.addEventListener("load", () => {
+    document.getElementById("loader").style.display = "none";
+});
+
+
+// ===== Sidebar Toggle =====
+const menuToggle = document.querySelector(".menu-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+
+// ===== Submenu Toggle =====
+document.querySelectorAll(".has-sub .menu-link").forEach(menu => {
+    menu.addEventListener("click", () => {
+        menu.parentElement.classList.toggle("open");
+    });
+});
+
+
+// ===== Dummy Student Data =====
+const students = [
+    { id: 1, name: "Amit Patil", branch: "CSE", year: 4, email: "amit@gmail.com", status: "Active" },
+    { id: 2, name: "Riya Deshmukh", branch: "IT", year: 3, email: "riya@gmail.com", status: "Active" },
+    { id: 3, name: "Sagar Pawar", branch: "Mechanical", year: 4, email: "sagar@gmail.com", status: "Passed" },
+    { id: 4, name: "Neha Kale", branch: "CSE", year: 2, email: "neha@gmail.com", status: "Active" },
+    { id: 5, name: "Pratik Jadhav", branch: "IT", year: 1, email: "pratik@gmail.com", status: "Active" }
+];
+
+const tableBody = document.getElementById("studentTable");
+const searchInput = document.getElementById("search");
+const branchFilter = document.getElementById("branchFilter");
+
+
+// ===== Render Students =====
+function renderStudents(data) {
+    tableBody.innerHTML = "";
+
+    data.forEach(stu => {
+        const row = `
+            <tr>
+                <td>${stu.id}</td>
+                <td>${stu.name}</td>
+                <td>${stu.branch}</td>
+                <td>${stu.year}</td>
+                <td>${stu.email}</td>
+                <td>${stu.status}</td>
+            </tr>
+        `;
+        tableBody.insertAdjacentHTML("beforeend", row);
+
+        const lastRow = tableBody.lastElementChild;
+        lastRow.addEventListener("click", () => {
+            document.querySelectorAll("#studentTable tr").forEach(tr => tr.classList.remove("active-row"));
+            lastRow.classList.add("active-row");
+        });
+
+    });
+
+    // Dashboard cards update
+    document.getElementById("total").innerText = students.length;
+    document.getElementById("active").innerText =
+        students.filter(s => s.status === "Active").length;
+    document.getElementById("final").innerText =
+        students.filter(s => s.year === 4).length;
+}
+
+
+// ===== Search + Filter =====
+function filterStudents() {
+    const searchText = searchInput.value.toLowerCase();
+    const branchValue = branchFilter.value;
+
+    const filtered = students.filter(stu => {
+        return (
+            stu.name.toLowerCase().includes(searchText) &&
+            (branchValue === "" || stu.branch === branchValue)
+        );
+    });
+
+    renderStudents(filtered);
+}
+
+searchInput.addEventListener("input", filterStudents);
+branchFilter.addEventListener("change", filterStudents);
+
+
+// ===== Initial Load =====
+renderStudents(students);
+
+/* ================= PROFILE DROPDOWN ================= */
+
+const profileBtn = document.getElementById("profileBtn");
+
+if(profileBtn){
+    profileBtn.addEventListener("click", e => {
+        e.stopPropagation();
+        const dropdown = profileBtn.querySelector(".dropdown");
+        dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+    });
+}
+
+/* ================= LIVE DATA UPDATE FUNCTION ================= */
+
+window.updateDashboardData = function(type, value){
+    if(dashboardData[type] === undefined) return;
+
+    dashboardData[type] += value;
+    dashboardData.notifications.push(`Updated ${type} by ${value}`);
+
+    localStorage.setItem("dashboardData", JSON.stringify(dashboardData));
+    renderDashboard();
+    renderNotifications();
+};
+
+// profile details popup
+// Profile Button
+document.getElementById("profile").addEventListener("click", function () {
+    window.location.href = "profile.html";   // create this page later
+});
+
+// Settings Button
+document.getElementById("Settings").addEventListener("click", function () {
+    window.location.href = "settings.html";  // create this page later
+});
+
+// Logout Button
+document.getElementById("backLoginBtn").addEventListener("click", function () {
+
+    // Clear login session if you use localStorage
+    localStorage.removeItem("isLoggedIn");
+
+    // Redirect to login page
+    window.location.href ="alogin.html";  
+});
+
+// ===== Collapsible Sidebar Layout Fix =====
+const mainContent = document.querySelector("main");
+
+// Restore sidebar state
+if (localStorage.getItem("sidebarCollapsed") === "true") {
+    sidebar.classList.add("collapsed");
+    mainContent.classList.add("collapsed");
+}
+
+// Toggle collapse
+menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("collapsed");
+    mainContent.classList.toggle("collapsed");
+
+    // Save state
+    localStorage.setItem("sidebarCollapsed", sidebar.classList.contains("collapsed"));
+});
+
+// ================= ANALYTICS CHARTS =================
+
+// Student Strength
+new Chart(document.getElementById("strengthChart"), {
+    type: "bar",
+    data: {
+        labels: ["Total", "Active", "Final Year"],
+        datasets: [{
+            label: "Students",
+            data: [
+                students.length,
+                students.filter(s => s.status === "Active").length,
+                students.filter(s => s.year === 4).length
+            ]
+        }]
+    }
+});
+
+
+// Branch-wise Report
+const branchCount = {};
+students.forEach(s => {
+    branchCount[s.branch] = (branchCount[s.branch] || 0) + 1;
+});
+
+new Chart(document.getElementById("branchChart"), {
+    type: "pie",
+    data: {
+        labels: Object.keys(branchCount),
+        datasets: [{
+            data: Object.values(branchCount)
+        }]
+    }
+});
+
+
+// Attendance Graph (Demo Data)
+new Chart(document.getElementById("attendanceChart"), {
+    type: "line",
+    data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+        datasets: [{
+            label: "Attendance %",
+            data: [82, 88, 75, 90, 85],
+            tension: 0.4
+        }]
+    }
+});
+
+
+// Fee Collection Graph (Demo Data)
+new Chart(document.getElementById("feeChart"), {
+    type: "bar",
+    data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+        datasets: [{
+            label: "₹ Collection (Lakhs)",
+            data: [2.1, 3.4, 2.8, 4.0, 3.6]
+        }]
+    }
+});
+
+// ================= ADD STUDENT POPUP =================
+
+const addStudentBtn = document.querySelector(".btn.primary");
+const modal = document.getElementById("addStudentModal");
+const cancelBtn = document.getElementById("cancelStudent");
+const submitBtn = document.getElementById("submitStudent");
+
+// Open Modal
+addStudentBtn.addEventListener("click", () => {
+    modal.style.display = "grid";
+});
+
+// Cancel Modal
+cancelBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+const formError = document.getElementById("formError");
+
+submitBtn.addEventListener("click", () => {
+
+    const fields = [
+        fullName.value,
+        dob.value,
+        gender.value,
+        branch.value,
+        year.value,
+        roll.value,
+        email.value,
+        mobile.value,
+        address.value,
+        parentContact.value
+    ];
+
+    // Check empty fields
+    const hasEmpty = fields.some(val => val.trim() === "");
+
+    if(hasEmpty){
+        formError.style.display = "block";
+        formError.innerText = "⚠️ Please fill all required fields before submitting.";
+        return;
+    }
+
+    // Success
+    formError.style.display = "none";
+    alert("✅ Student added successfully!");
+    modal.style.display = "none";
+});
+
+
+// Close modal when clicking outside box
+modal.addEventListener("click", (e) => {
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+});
+
+// ================= UPDATE & PROFILE VIEW =================
+
+const updateBtn = document.querySelector(".btn.warning");
+const profileBtnView = document.querySelector(".btn.info");
+const profileModal = document.getElementById("profileModal");
+const profileDetails = document.getElementById("profileDetails");
+const closeProfile = document.getElementById("closeProfile");
+
+let selectedIndex = null;
+
+
+// Detect selected row
+document.getElementById("studentTable").addEventListener("click", e => {
+    const row = e.target.closest("tr");
+    if(!row) return;
+    selectedIndex = row.rowIndex - 1;
+});
+
+
+// ========== UPDATE STUDENT ==========
+updateBtn.addEventListener("click", () => {
+
+    if(selectedIndex === null){
+        alert("⚠️ Please select a student row first.");
+        return;
+    }
+
+    const s = students[selectedIndex];
+
+    // Reuse your existing Add Student modal fields
+    document.getElementById("fullName").value = s.name;
+    document.getElementById("branch").value = s.branch;
+    document.getElementById("year").value = s.year;
+    document.getElementById("email").value = s.email;
+
+    // Open modal
+    document.getElementById("addStudentModal").style.display = "grid";
+});
+
+
+// ========== PROFILE VIEW ==========
+profileBtnView.addEventListener("click", () => {
+
+    if(selectedIndex === null){
+        alert("⚠️ Please select a student row first.");
+        return;
+    }
+
+    const s = students[selectedIndex];
+
+    profileDetails.innerHTML = `
+        <div><b>Name:</b> ${s.name}</div>
+        <div><b>Branch:</b> ${s.branch}</div>
+        <div><b>Year:</b> ${s.year}</div>
+        <div><b>Email:</b> ${s.email}</div>
+        <div><b>Status:</b> ${s.status}</div>
+    `;
+
+    profileModal.style.display = "grid";
+});
+
+
+// Close Profile Modal
+closeProfile.addEventListener("click", () => {
+    profileModal.style.display = "none";
+});
+
+// ================= UPDATE / DELETE / PROFILE FULL DATA =================
+
+const deleteBtn = document.getElementById("deleteStudent");
+const photoInput = document.getElementById("photo");
+const photoPreview = document.getElementById("photoPreview");
+
+let editIndex = null;
+let uploadedPhoto = "";
+
+// Photo Preview
+photoInput.addEventListener("change", () => {
+    const file = photoInput.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = () => {
+            uploadedPhoto = reader.result;
+            photoPreview.src = uploadedPhoto;
+            photoPreview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+
+// Modify ADD button behavior
+addStudentBtn.addEventListener("click", () => {
+    editIndex = null;
+    deleteBtn.style.display = "none";
+    photoPreview.style.display = "none";
+});
+
+
+// Update button behavior
+updateBtn.addEventListener("click", () => {
+
+    if(selectedIndex === null){
+        alert("⚠️ Please select a student first.");
+        return;
+    }
+
+    editIndex = selectedIndex;
+    const s = students[selectedIndex];
+
+    fullName.value = s.name;
+    branch.value = s.branch;
+    year.value = s.year;
+    email.value = s.email;
+    uploadedPhoto = s.photo || "";
+
+    if(uploadedPhoto){
+        photoPreview.src = uploadedPhoto;
+        photoPreview.style.display = "block";
+    }
+
+    deleteBtn.style.display = "inline-block";
+    modal.style.display = "grid";
+});
+
+
+// Save (Add / Update)
+submitBtn.addEventListener("click", () => {
+
+    if(editIndex === null){
+        // ADD
+        students.push({
+            id: students.length + 1,
+            name: fullName.value,
+            branch: branch.value,
+            year: year.value,
+            email: email.value,
+            status: "Active",
+            photo: uploadedPhoto
+        });
+    } else {
+        // UPDATE
+        students[editIndex].name = fullName.value;
+        students[editIndex].branch = branch.value;
+        students[editIndex].year = year.value;
+        students[editIndex].email = email.value;
+        students[editIndex].photo = uploadedPhoto;
+    }
+
+    modal.style.display = "none";
+    renderStudents(students);
+});
+
+
+// DELETE student
+deleteBtn.addEventListener("click", () => {
+
+    if(confirm("Are you sure you want to delete this student?")){
+        students.splice(editIndex, 1);
+        modal.style.display = "none";
+        renderStudents(students);
+    }
+});
+
+
+// PROFILE VIEW FULL DETAILS
+profileBtnView.addEventListener("click", () => {
+
+    if(selectedIndex === null){
+        alert("⚠️ Please select a student first.");
+        return;
+    }
+
+    const s = students[selectedIndex];
+
+    document.getElementById("profilePhoto").src =
+        s.photo || "https://i.pravatar.cc/150";
+
+    profileDetails.innerHTML = `
+        <div><b>Name:</b> ${s.name}</div>
+        <div><b>Branch:</b> ${s.branch}</div>
+        <div><b>Year:</b> ${s.year}</div>
+        <div><b>Email:</b> ${s.email}</div>
+        <div><b>Status:</b> ${s.status}</div>
+        <div><b>ID:</b> ${s.id}</div>
+    `;
+
+    profileModal.style.display = "grid";
+});
+
+
+

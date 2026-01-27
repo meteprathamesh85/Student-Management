@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EduManage | Students</title>
+<link rel="stylesheet" href="stud.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+    
+<header class="topbar">
+    <h2>🎓 Student Information</h2>
+    <input type="text" id="searchInput" placeholder="Search student...">
+</header>
+
+<main class="container">
+
+    <div id="studentList" class="grid"></div>
+
+</main>
+
+<!-- Modal -->
+<div class="modal" id="studentModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <h3>Edit Student</h3>
+
+        <input id="editName" placeholder="Name">
+        <input id="editBranch" placeholder="Branch">
+        <input id="editYear" placeholder="Year">
+        <input id="editPhone" placeholder="Phone">
+
+        <button id="saveBtn">Save Changes</button>
+    </div>
+</div>
+
+<script src="stud.js"></script>
+</body>
+</html>

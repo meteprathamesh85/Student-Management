@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EduManage | Admin Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="stud.css">
+
+</head>
+<body>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+    <i class="fas fa-bars menu-toggle"></i>
+    <h2 onclick="location.href='adashboard.html'" style="cursor: pointer;">🎓 Student Information</h2>
+    <div class="breadcrumb">Dashboard › </div>
+
+    <div class="actions">
+
+        <div class="icon-box" id="notifyBtn">
+            <i class="fas fa-bell"></i>
+            <span class="badge" id="notifyCount">0</span>
+            <div class="dropdown" id="notifyMenu"></div>
+        </div>
+
+        <div class="icon-box" id="profileBtn">
+            <img src="https://i.pravatar.cc/150">
+            <div class="dropdown">
+                <p id="profile">👤 My Profile</p>
+                <p id="Settings">⚙ Settings</p >
+                <p id="backLoginBtn">🚪 Logout</p>
+            </div>
+        </div>
+
+    </div>
+    
+</header>
+
+<!-- Loader -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="profile-box">
+        <img src="https://i.pravatar.cc/150">
+        <h4>Admin</h4>
+        <small>Administrator</small>
+    </div>
+
+    <input class="sidebar-search" placeholder="Search menu...">
+
+    <ul class="menu">
+
+        <li class="menu-item">
+            <div class="menu-link" data-title="Dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></div>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link" data-title="Students">
+                <i class="fas fa-user-graduate"></i><span><a href="#top" style="color: rgb(36, 35, 35);">Students</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>All Students</li>
+                <li>Add Student</li>
+                <li>Update student</li>
+                <li>Profile view</li>
+            </ul>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link" data-title="Attendance">
+                <i class="fas fa-calendar-check"></i><span><a href="#" style="color: rgb(36, 35, 35);">Attendance</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>Mark attendance</li>
+                <li>View attendance</li>
+                <li>Monthly report</li>
+                <li>Defaulter List (<75%)</li>
+            </ul>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link" data-title="Fees">
+                <i class="fas fa-money-bill-wave"></i><span><a href="#" style="color: rgb(36, 35, 35);">fees management</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>fees Collection</li>
+                <li>pending fees</li>
+                <li>payment history</li>
+                <li>generate receipt</li>
+                <li>Scholarship status</li>
+            </ul>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link" data-title="Academics">
+                <i class="fas fa-book"></i><span><a href="#" style="color: rgb(36, 35, 35);">Academics records</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>subjects</li>
+                <li>Assignments</li>
+                <li>Exams</li>
+                <li>Grades</li>
+                <li>Top performers</li>
+                <li>Backlog students</li>
+            </ul>
+        </li>
+
+    </ul>
+</aside>
+
+<!-- Main -->
+    <main>
+        <section id="dashboard">
+    <!-- ===== ANALYTICS DASHBOARD ===== -->
+            <div class="analytics">
+
+                <div class="chart-box">
+                    <h3>🎓 Student Strength Report</h3>
+                    <canvas id="strengthChart"></canvas>
+                </div>
+
+                <div class="chart-box">
+                    <h3>🏫 Branch-wise Report</h3>
+                    <canvas id="branchChart"></canvas>
+                </div>
+                
+                <div class="chart-box">
+                    <h3>📊 Attendance Graph</h3>
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+
+                <div class="chart-box">
+                    <h3>💰 Fee Collection Graph</h3>
+                    <canvas id="feeChart"></canvas>
+                </div>
+
+            </div>
+        </section>
+        <section id="studentsSection">
+            <!-- Cards -->
+             <h2>Students</h2>
+            <div class="cards">
+                <div class="card">Total Students <span id="total">0</span></div>
+                <div class="card">Active Students <span id="active">0</span></div>
+                <div class="card">Final Year <span id="final">0</span></div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters filters-row">
+    <input type="text" id="search" placeholder="Search student...">
+
+    <select id="branchFilter">
+        <option value="">All Branch</option>
+        <option>CSE</option>
+        <option>IT</option>
+        <option>Mechanical</option>
+        <option>E&TC</option>
+        <option>AIDS</option>
+        <option>electrical</option>
+        <option>civil</option>
+    </select>
+
+    <!-- Student Action Buttons -->
+    <div class="student-actions inline-actions">
+        <button class="btn primary">➕ Add Student</button>
+        <button class="btn warning">✏️ Update Student</button>
+        <button class="btn info">👤 Profile View</button>
+    </div>
+</div>
+
+
+            <!-- Table -->
+            <div class="table-card">
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Branch</th>
+                            <th>Year</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+
+    </main>
+
+</div>
+</div>
+<!-- ================= ADD STUDENT MODAL ================= -->
+<div class="modal" id="addStudentModal">
+    <div class="modal-box">
+
+        <h3>➕ Add New Student</h3>
+
+        <div class="form-grid">
+            <input type="text" placeholder="Full Name" id="fullName" required>
+
+            <input type="date" id="dob" required>
+
+            <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <input type="text" placeholder="Branch" id="branch" required>
+
+            <input type="text" placeholder="Year / Semester" id="year">
+
+            <input type="text" placeholder="Roll No" id="roll">
+
+            <input type="email" placeholder="Email" id="email" required>
+
+            <input type="tel" placeholder="Mobile" id="mobile" required>
+
+            <input type="text" placeholder="Address" id="address">
+
+            <input type="tel" placeholder="Parent Contact" id="parentContact">
+
+            <label for="photo">photo</label>
+            <input type="file" id="photo">
+            <img id="photoPreview" style="width:80px;margin-top:8px;border-radius:8px;display:none;">
+
+        </div>
+
+        <p id="formError" class="form-error"></p>
+
+        <div class="modal-actions">
+    <button id="submitStudent" class="btn primary">Save</button>
+    <button id="deleteStudent" class="btn info" style="display:none;">🗑 Delete</button>
+    <button id="cancelStudent" class="btn warning">Cancel</button>
+</div>
+
+
+    </div>
+</div>
+
+<!-- ================= PROFILE VIEW MODAL ================= -->
+<div class="modal" id="profileModal">
+    <div class="modal-box">
+
+        <h3>👤 Student Profile</h3>
+
+        <img id="profilePhoto" style="width:100px;border-radius:50%;margin-bottom:10px;">
+        <div class="profile-grid" id="profileDetails"></div>
+
+        <div class="modal-actions">
+            <button id="closeProfile" class="btn primary">Close</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="stud.js"></script>
+</body>
+</html>

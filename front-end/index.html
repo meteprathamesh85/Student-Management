@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EduManage</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+</head>
+<body>
+<div id="top"></div>
+
+<header class="navbar">
+
+    <div class="nav-logo">
+        <ion-icon name="book"></ion-icon>
+        <span>EduManage</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#top">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#schemes">Schemes</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="#support">Support</a>
+    </nav>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+    <span class="badge">Smart Education Platform</span>
+
+    <h1 class="title">
+    Welcome to <br>
+    <span class="main-title">Student Management System</span>
+    </h1>
+
+
+    <p class="subtitle">
+        Manage students, attendance, academic records, and performance tracking in one secure and intelligent platform.
+    </p>
+
+    <button class="cta-btn" onclick="openRolePopup()" >Get Started</button>
+
+
+    <div class="hero-image">
+        <img src="images/hero.png" alt="Students">
+    </div>
+
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about-wrapper">
+
+    <!-- ABOUT TEXT -->
+    <div class="about-text">
+        <h2>About EduManage</h2>
+        <p>
+            EduManage is a smart digital student management platform designed to
+            simplify academic administration, enhance transparency, and improve
+            institutional performance through real-time analytics and automation.
+        </p>
+    </div>
+    <div class="info-section">
+    <!-- CARD -->
+    <div class="info-card">
+        <img src="images/faculty.jpg">
+        <h3>Faculty</h3>
+        <p>Highly experienced academic staff.</p>
+        <span class="know-more" onclick="openPopup('faculty')">Know More →</span>
+    </div>
+
+    <div class="info-card">
+        <img src="images/students.jpg">
+        <h3>Students</h3>
+        <p>Active learners and placement achievers.</p>
+        <span class="know-more" onclick="openPopup('students')">Know More →</span>
+    </div>
+
+    <div class="info-card">
+        <img src="images/departments.jpg">
+        <h3>Departments</h3>
+        <p>Multiple engineering and tech branches.</p>
+        <span class="know-more" onclick="openPopup('departments')">Know More →</span>
+    </div>
+
+    <div class="info-card">
+        <img src="images/infrastructure.jpg">
+        <h3>Infrastructure</h3>
+        <p>Modern labs and smart classrooms.</p>
+        <span class="know-more" onclick="openPopup('infrastructure')">Know More →</span>
+    </div>
+
+    <div class="info-card">
+        <img src="images/achievements.jpg">
+        <h3>Achievements</h3>
+        <p>National and state-level recognitions.</p>
+        <span class="know-more" onclick="openPopup('achievements')">Know More →</span>
+    </div>
+    </div>
+</section>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup" onclick="outsideClose(event)">
+    <div class="popup-box">
+        <h2 id="popupTitle"></h2>
+        <div id="popupContent"></div>
+    </div>
+</div>
+
+
+<!-- FEATURES SECTION -->
+<section id="features" class="features-section">
+
+    <div class="features-header">
+        <h2>Powerful Features</h2>
+        <p>
+            Everything you need to manage academics, administration, and performance
+            in one intelligent platform.
+        </p>
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <ion-icon name="people-outline"></ion-icon>
+            <h3>Role Based Access</h3>
+            <p>Admin, Teacher and Student access with secure permissions.</p>
+        </div>
+
+        <div class="feature-card">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <h3>Attendance Tracking</h3>
+            <p>Automated attendance with real-time monitoring.</p>
+        </div>
+
+        <div class="feature-card">
+            <ion-icon name="bar-chart-outline"></ion-icon>
+            <h3>Analytics Dashboard</h3>
+            <p>Visual insights and performance reports.</p>
+        </div>
+
+        <div class="feature-card">
+            <ion-icon name="cloud-outline"></ion-icon>
+            <h3>Cloud Storage</h3>
+            <p>Secure backup and scalable infrastructure.</p>
+        </div>
+
+        <div class="feature-card">
+            <ion-icon name="notifications-outline"></ion-icon>
+            <h3>Smart Notifications</h3>
+            <p>Instant alerts for students and faculty.</p>
+        </div>
+
+        <div class="feature-card">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            <h3>Data Security</h3>
+            <p>Advanced encryption and access control.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SCHEMES SECTION -->
+<section id="schemes" class="schemes-section">
+
+    <div class="schemes-header">
+        <h2>Government Schemes</h2>
+        <p>
+            Explore educational schemes and financial support programs available for students.
+        </p>
+    </div>
+
+    <div class="schemes-grid">
+
+        <!-- Card 1 -->
+        <div class="scheme-card">
+            <div class="scheme-inner">
+
+                <div class="scheme-front">
+                    <ion-icon name="cash-outline"></ion-icon>
+                    <h3>PM Scholarship</h3>
+                </div>
+
+                <div class="scheme-back">
+                    <p>Financial assistance for meritorious students.</p>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="scheme-card">
+            <div class="scheme-inner">
+
+                <div class="scheme-front">
+                    <ion-icon name="school-outline"></ion-icon>
+                    <h3>Merit Scholarship</h3>
+                </div>
+
+                <div class="scheme-back">
+                    <p>Rewarding academic excellence and achievements.</p>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="scheme-card">
+            <div class="scheme-inner">
+
+                <div class="scheme-front">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <h3>Minority Welfare</h3>
+                </div>
+
+                <div class="scheme-back">
+                    <p>Support for minority community education.</p>
+                    <button>Apply Now</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES SECTION -->
+<section id="services" class="services-modern">
+
+    <!-- LEFT INFO -->
+    <div class="services-left">
+        <h2>Our Services</h2>
+        <p>
+            EduManage provides powerful digital services that simplify administration,
+            enhance productivity, and improve academic performance.
+        </p>
+    </div>
+
+    <!-- RIGHT CARDS -->
+    <div class="services-right">
+
+        <div class="service-card">
+            <ion-icon name="people-outline"></ion-icon>
+            <h3>Student Management</h3>
+            <p>Maintain student profiles, attendance and academic history.</p>
+        </div>
+
+        <div class="service-card">
+            <ion-icon name="school-outline"></ion-icon>
+            <h3>Teacher Management</h3>
+            <p>Manage schedules, grading, assignments and performance reports.</p>
+        </div>
+
+        <div class="service-card">
+            <ion-icon name="bar-chart-outline"></ion-icon>
+            <h3>Analytics & Reports</h3>
+            <p>Visual dashboards for performance tracking and insights.</p>
+        </div>
+
+        <div class="service-card">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <h3>Secure Data</h3>
+            <p>Encrypted storage with role-based access control.</p>
+        </div>
+
+        <div class="service-card">
+            <ion-icon name="notifications-outline"></ion-icon>
+            <h3>Smart Alerts</h3>
+            <p>Automated notifications and announcements.</p>
+        </div>
+
+        <div class="service-card">
+            <ion-icon name="cloud-outline"></ion-icon>
+            <h3>Cloud Integration</h3>
+            <p>Scalable cloud infrastructure for future expansion.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SUPPORT SECTION -->
+<section id="support" class="support-section">
+
+    <div class="support-card">
+
+        <!-- LEFT INFO -->
+        <div class="support-left">
+    <h2>Need Support?</h2>
+    <p>
+        Our support team is always ready to assist you with technical issues,
+        account queries, and general guidance.
+    </p>
+
+    <!-- CONTACT INFO -->
+    <div class="support-contact">
+
+        <div class="contact-row">
+            <ion-icon name="mail-outline"></ion-icon>
+            <span>support@edumanage.com</span>
+        </div>
+
+        <div class="contact-row">
+            <ion-icon name="call-outline"></ion-icon>
+            <span>+91 98765 43210</span>
+        </div>
+
+        <div class="contact-row">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>Pune, Maharashtra</span>
+        </div>
+
+    </div>
+
+    <p class="support-note">
+        Please share complete details so we can resolve your request faster.
+    </p>
+</div>
+
+
+        <!-- RIGHT FORM -->
+        <form class="support-form" id="supportform">
+
+            <div class="row">
+                <input type="text" id="firstName" placeholder="First Name *" required>
+                <input type="text" id="lastName" placeholder="Last Name *" required>
+            </div>
+
+            <input type="email" id="email" placeholder="Email *" required>
+            <input type="text" id="phone" placeholder="Phone Number (optional)">
+
+            <select id="topic" required>
+                <option value="">Select your topic *</option>
+                <option>Login Issue</option>
+                <option>Account Problem</option>
+                <option>Technical Support</option>
+                <option>Feedback</option>
+            </select>
+
+            <input type="text" id="studentId" placeholder="Student / Staff ID (optional)">
+            <textarea rows="4" id="message" placeholder="Message *" required></textarea>
+
+            <button type="button" onclick="submitSupport()">Submit</button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- Decorative Shapes -->
+<div class="shape circle1"></div>
+<div class="shape circle2"></div>
+<div class="shape pill1"></div>
+<div class="shape pill2"></div>
+
+<!-- ROLE POPUP -->
+<div class="role-popup" id="rolePopup" onclick="outsideClose(event)">
+
+    <div class="popup-content">
+        <span class="close-btn" onclick="closeRolePopup()">✖</span>
+
+        <h2>Login / Register as</h2>
+
+        <div class="role-cards" class="role-card">
+            
+            <div class="role-card" onclick="location.href='./roles/Admin/alogin.html'">
+                <ion-icon name="shield-checkmark"></ion-icon>
+                <h3>Admin</h3>
+                <p>Manage system and users</p>
+            </div>
+
+            <div class="role-card" onclick="location.href='./roles/Teacher/tlogin.html'">
+                <ion-icon name="school"></ion-icon>
+                <h3>Teacher</h3>
+                <p>Manage classes and results</p>
+            </div>
+
+            <div class="role-card" onclick="location.href='./roles/Student/slogin.html'">
+                <ion-icon name="person"></ion-icon>
+                <h3>Student</h3>
+                <p>View profile and progress</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+
+    <div class="footer-grid">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+            <h3>EduManage</h3>
+            <p>
+                Smart student management platform delivering
+                digital excellence for institutions.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="#top">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#schemes">Schemes</a>
+            <a href="#services">Services</a>
+        </div>
+
+        <!-- SUPPORT -->
+        <div class="footer-links">
+            <h4>Support</h4>
+            <a href="#support">Help Center</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="footer-social">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <ion-icon name="logo-facebook"></ion-icon>
+                <ion-icon name="logo-instagram"></ion-icon>
+                <ion-icon name="logo-linkedin"></ion-icon>
+                <ion-icon name="logo-github"></ion-icon>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 EduManage. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+</html>

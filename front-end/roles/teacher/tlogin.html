@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Login | EduManage</title>
+    <link rel="stylesheet" href="tlogin.css">
+</head>
+<body>
+
+    
+<header class="navbar">
+
+    <div class="nav-logo">
+        <ion-icon name="book"></ion-icon>
+        <span>EduManage</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="../../index.html">Home</a>
+    </nav>
+
+</header>
+
+<div class="auth-container" id="container">
+
+    <!-- LOGIN PANEL -->
+    <div class="form-container sign-in">
+        <form>
+            <h2>Teacher Login</h2>
+
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+
+            <span class="link" id="forgotBtn">Forgot Password?</span>
+
+            <button type="button" id="loginSubmit">Login</button>
+        </form>
+    </div>
+
+    <!-- REGISTER PANEL -->
+    <div class="form-container sign-up">
+        <form>
+            <h2>Create Account</h2>
+
+            <input type="text" id="regName" placeholder="Full Name">
+            <input type="email" id="regEmail" placeholder="Email">
+            <input type="text" id="regEnroll" placeholder="Employee ID">
+            <input type="password" id="regPassword" placeholder="Password">
+
+            <button type="button" id="registerSubmit">Register</button>
+        </form>
+    </div>
+
+    <!-- FORGOT PANEL -->
+    <div class="form-container forgot-panel">
+        <form>
+            <h2>Reset Password 🔐</h2>
+
+            <input type="email" id="forgotEmail" placeholder="Registered Email">
+            <button type="button" id="sendOtpBtn">Send OTP</button>
+
+            <div class="otp-box" id="otpBox">
+                <div class="timer" id="otpTimer">02:00</div>
+
+                <input type="text" id="otpInput" placeholder="Enter OTP">
+                <input type="password" id="newPassword" placeholder="New Password">
+
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+
+                <button type="button" id="updatePasswordBtn">Update Password</button>
+            </div>
+
+            <span class="link" id="backLoginBtn">← Back to Login</span>
+        </form>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay-container">
+        <div class="overlay">
+
+            <div class="overlay-panel overlay-left">
+                <h2>Welcome Back 🎉</h2>
+                <p>Already have an account? Login here.</p>
+                <button class="ghost" id="loginBtn">Login</button>
+            </div>
+
+            <div class="overlay-panel overlay-right">
+                <h2>Hello Teacher 👋</h2>
+                <p>Don’t have an account? Register now.</p>
+                <button class="ghost" id="registerBtn">Register</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="tlogin.js"></script>
+</body>
+</html>
