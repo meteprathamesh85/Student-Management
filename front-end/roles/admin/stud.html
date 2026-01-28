@@ -207,35 +207,43 @@
     <!-- Top Controls -->
     <div class="attendance-controls">
 
-        <input id="searchInput" type="text" placeholder="🔍 Search student..." class="att-search">
+        <input id="searchInput" class="att-search" placeholder="Search student...">
 
-        <select id="durationFilter" class="att-select">
-            <option>Monthly</option>
-            <option>Weekly</option>
-            <option>Daily</option>
-            <option>Custom</option>
-        </select>
+<select id="durationFilter" class="att-select">
+    <option value="all">Duration</option>
+    <option value="monthly">Monthly</option>
+    <option value="weekly">Weekly</option>
+    <option value="daily">Daily</option>
+</select>
 
-        <select id="deptFilter" class="att-select">
-            <option>Comp</option>
-            <option>IT</option>
-            <option>AIDS</option>
-            <option>E&TC</option>
-            <option>Electrical</option>
-            <option>Mech</option>
-            <option>Civil</option>
-        </select>
+<select id="deptFilter" class="att-select">
+    <option value="all">Departments</option>
+    <option>Comp</option>
+    <option>IT</option>
+    <option>AIDS</option>
+    <option>E&TC</option>
+    <option>Electrical</option>
+    <option>Mech</option>
+    <option>Civil</option>
+</select>
 
-        <select id="yearFilter" class="att-select">
-            <option>1st Year</option>
-            <option>2nd Year</option>
-            <option>3rd Year</option>
-            <option>4th Year</option>
-        </select>
+<select id="yearFilter" class="att-select">
+    <option value="all">Year</option>
+    <option>1st year</option>
+    <option>2nd year</option>
+    <option>3rd year</option>
+    <option>4th year</option>
+</select>
+
 
         <button class="att-btn primary" onclick="markAttendance()">✔ Mark Attendance</button>
         <button class="att-btn" onclick="exportExcel()">📤 Export</button>
 
+    </div>
+
+    <div class="bulk-actions">
+        <button id="editBtn" disabled>✏️ Edit</button>
+        <button id="deleteBtn" disabled>🗑️ Delete</button>
     </div>
 
     <!-- Layout -->
@@ -247,7 +255,7 @@
             <table class="attendance-table">
                 <thead>
                     <tr>
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox" id="selectAll"></th>
                         <th>Photo</th>
                         <th>Name</th>
                         <th>ID</th>
@@ -255,8 +263,6 @@
                         <th>Year</th>
                         <th>Date</th>
                         <th>Type</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody id="attendanceBody"></tbody>

@@ -607,3 +607,22 @@ main.collapsed {
     height: 250px;
     width: 400px;
 }
+
+.bulk-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.bulk-actions button {
+    padding: 6px 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: #e5e7eb;
+}
+
+.bulk-actions button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
