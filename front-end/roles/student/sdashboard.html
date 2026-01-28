@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EduManage | Admin Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="adashboard.css">
+
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="profile-box">
+        <img src="https://i.pravatar.cc/150">
+        <h4>Admin</h4>
+        <small>Administrator</small>
+    </div>
+
+    <input class="sidebar-search" placeholder="Search menu...">
+
+    <ul class="menu">
+
+        <li class="menu-item">
+            <div class="menu-link"><i class="fas fa-chart-line"></i><span>Dashboard</span></div>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link">
+                <i class="fas fa-user-graduate"></i><span><a href="stud.html" style="color: rgb(36, 35, 35);">Students</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>All Students</li>
+                <li>Add Student</li>
+                <li>Attendance</li>
+                <li>Results</li>
+            </ul>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link">
+                <i class="fas fa-chalkboard-teacher"></i><span><a href="teach.html " style="color: rgb(36, 35, 35);">Teachers</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>All Teachers</li>
+                <li>Add Teacher</li>
+                <li>Schedules</li>
+                <li>Leaves</li>
+            </ul>
+        </li>
+
+        <li class="menu-item has-sub">
+            <div class="menu-link">
+                <i class="fas fa-building-columns"></i><span><a href="branch.html" style="color: rgb(36, 35, 35);">Branches</a></span>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="submenu">
+                <li>First Year</li>
+                <li>IT</li>
+                <li>Computer</li>
+                <li>E&TC</li>
+                <li>AIDS</li>
+                <li>Electrical</li>
+                <li>Mechanical</li>
+                <li>Civil</li>
+            </ul>
+        </li>
+
+        <li class="menu-item">
+            <div class="menu-link"><i class="fas fa-gear"></i><span id="setting">Settings</span></div>
+        </li>
+
+    </ul>
+</aside>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <i class="fas fa-bars menu-toggle"></i>
+    <h2>Admin Dashboard</h2>
+    <div class="breadcrumb">Dashboard › </div>
+
+    <div class="actions">
+
+        <div class="icon-box" id="notifyBtn">
+            <i class="fas fa-bell"></i>
+            <span class="badge" id="notifyCount">0</span>
+            <div class="dropdown" id="notifyMenu"></div>
+        </div>
+
+        <div class="icon-box" id="profileBtn">
+            <img src="https://i.pravatar.cc/150">
+            <div class="dropdown">
+                <p id="profile">👤 My Profile</p>
+                <p id="Settings">⚙ Settings</p >
+                <p id="backLoginBtn">🚪 Logout</p>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+<div class="cards">
+    <div class="card"><h4>Total Students</h4><p id="students">0</p></div>
+    <div class="card"><h4>Total Teachers</h4><p id="teachers">0</p></div>
+    <div class="card"><h4>Fees Collected</h4><p id="fees">₹0</p></div>
+    <div class="card"><h4>Pending Fees</h4><p id="pending">₹0</p></div>
+</div>
+
+<div class="charts">
+    <div class="chart-box">
+        <h3>Fee Collection</h3>
+        <canvas id="feeChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+        <h3>Attendance</h3>
+        <canvas id="attendanceChart"></canvas>
+    </div>
+</div>
+
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="adashboard.js"></script>
+</body>
+</html>

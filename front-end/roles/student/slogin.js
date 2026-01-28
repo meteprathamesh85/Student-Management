@@ -1,4 +1,6 @@
 const API = "http://localhost:3000";
+const ROLE = "student";
+const DASHBOARD = "sdashboard.html";
 
 const container = document.getElementById("container");
 

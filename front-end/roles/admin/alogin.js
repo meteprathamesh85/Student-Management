@@ -1,4 +1,7 @@
 const API = "http://localhost:3000";
+const ROLE = "admin";
+const DASHBOARD = "adashboard.html";
+
 const container = document.getElementById("container");
 
 const registerBtn = document.getElementById("registerBtn");

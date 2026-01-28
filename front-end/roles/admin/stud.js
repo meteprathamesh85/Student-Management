@@ -461,5 +461,131 @@ profileBtnView.addEventListener("click", () => {
     profileModal.style.display = "grid";
 });
 
+// ================= ATTENDANCE DATA =================
+// ================= DATA =================
+let attendanceData = [
+  { name:"Amit", id:1, dept:"Comp", year:"2nd", date:"2026-01-28", type:"Regular" },
+  { name:"Riya", id:2, dept:"IT", year:"3rd", date:"2026-01-28", type:"Regular" },
+  { name:"Sagar", id:3, dept:"AIDS", year:"4th", date:"2026-01-27", type:"Defaulter" }
+];
 
+let filteredData = [...attendanceData];
+
+// ================= TABLE =================
+function renderTable(data) {
+  const body = document.getElementById("attendanceBody");
+  body.innerHTML = "";
+
+  data.forEach((s, index) => {
+    body.innerHTML += `
+      <tr>
+        <td><input type="checkbox" class="rowCheck"></td>
+        <td>👤</td>
+        <td>${s.name}</td>
+        <td>${s.id}</td>
+        <td>${s.dept}</td>
+        <td>${s.year}</td>
+        <td>${s.date}</td>
+        <td>${s.type}</td>
+        <td><button onclick="editRow(${index})">✏️</button></td>
+        <td><button onclick="deleteRow(${index})">🗑️</button></td>
+      </tr>
+    `;
+  });
+}
+renderTable(filteredData);
+
+// ================= FILTERS =================
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+document.getElementById("deptFilter").addEventListener("change", applyFilters);
+document.getElementById("yearFilter").addEventListener("change", applyFilters);
+
+function applyFilters() {
+  const search = searchInput.value.toLowerCase();
+  const dept = deptFilter.value;
+  const year = yearFilter.value;
+
+  filteredData = attendanceData.filter(s =>
+    (s.name.toLowerCase().includes(search)) &&
+    (dept === "all" || s.dept === dept) &&
+    (year === "all" || s.year.includes(year))
+  );
+
+  renderTable(filteredData);
+}
+
+// ================= MARK ATTENDANCE =================
+function markAttendance() {
+  alert("✅ Attendance marked successfully!");
+}
+
+// ================= EXPORT =================
+function exportExcel() {
+  let csv = "Name,ID,Department,Year,Date,Type\n";
+  filteredData.forEach(s => {
+    csv += `${s.name},${s.id},${s.dept},${s.year},${s.date},${s.type}\n`;
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "attendance.csv";
+  link.click();
+}
+
+// ================= EDIT / DELETE =================
+function deleteRow(index) {
+  attendanceData.splice(index, 1);
+  applyFilters();
+}
+
+function editRow(index) {
+  const newType = prompt("Enter Type (Regular / Defaulter):");
+  if(newType) {
+    attendanceData[index].type = newType;
+    applyFilters();
+  }
+}
+
+// ================= FULL CALENDAR =================
+document.addEventListener("DOMContentLoaded", function () {
+  const calendarEl = document.getElementById("calendar");
+
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: "dayGridMonth",
+    height: 300,
+    events: attendanceData.map(s => ({
+      title: s.name,
+      date: s.date
+    }))
+  });
+
+  calendar.render();
+});
+
+
+// Charts
+new Chart(document.getElementById("attendanceLine"), {
+    type: "line",
+    data: {
+        labels: ["Mon","Tue","Wed","Thu","Fri"],
+        datasets: [{
+            label: "Attendance",
+            data: [50,60,55,70,90],
+            tension: 0.4,
+            fill: true
+        }]
+    }
+});
+
+new Chart(document.getElementById("attendanceBar"), {
+    type: "bar",
+    data: {
+        labels: ["Comp","IT","AIDS","Mech"],
+        datasets: [{
+            label: "Present",
+            data: [60,55,70,40]
+        }]
+    }
+});
 

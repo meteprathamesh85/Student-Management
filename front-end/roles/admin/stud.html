@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>EduManage | Admin Dashboard</title>
 
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="stud.css">
 
@@ -198,6 +200,93 @@
                 </table>
             </div>
         </section>
+
+        <!-- ================= ATTENDANCE SECTION ================= -->
+<section class="attendance-section">
+
+    <!-- Top Controls -->
+    <div class="attendance-controls">
+
+        <input id="searchInput" type="text" placeholder="🔍 Search student..." class="att-search">
+
+        <select id="durationFilter" class="att-select">
+            <option>Monthly</option>
+            <option>Weekly</option>
+            <option>Daily</option>
+            <option>Custom</option>
+        </select>
+
+        <select id="deptFilter" class="att-select">
+            <option>Comp</option>
+            <option>IT</option>
+            <option>AIDS</option>
+            <option>E&TC</option>
+            <option>Electrical</option>
+            <option>Mech</option>
+            <option>Civil</option>
+        </select>
+
+        <select id="yearFilter" class="att-select">
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+        </select>
+
+        <button class="att-btn primary" onclick="markAttendance()">✔ Mark Attendance</button>
+        <button class="att-btn" onclick="exportExcel()">📤 Export</button>
+
+    </div>
+
+    <!-- Layout -->
+    <div class="attendance-layout">
+
+        <!-- Table -->
+        <div class="attendance-table-box">
+
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Department</th>
+                        <th>Year</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceBody"></tbody>
+            </table>
+
+        </div>
+
+        <!-- Right Panel -->
+        <div class="attendance-right">
+
+            <div class="calendar-box">
+                <h4>📅 Attendance Calendar</h4>
+                <div id="calendar"></div>
+            </div>
+
+            <div class="chart-box">
+                <h4>Attendance Overview</h4>
+                <canvas id="attendanceLine"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h4>Attendance by Class</h4>
+                <canvas id="attendanceBar"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
     </main>
